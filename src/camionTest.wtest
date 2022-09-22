@@ -1,2 +1,63 @@
 import camion.*
 import cosas.*
+
+/*
+Por otro lado, armar un test del camión, cargado con lo siguiente:
+bumblebee como robot, la arena a granel con 150 kilos,
+*  la batería antiaérea con los misiles puestos,
+*  y el embalaje de seguridad poniéndole como contenido el paquete de
+ladrillos con 80 ladrillos.
+Para cada método, calcular qué resultado tiene que dar, y hacer el
+test correspondiente.
+Esto va en camionTest.wtest.
+*/
+
+describe "test de bumblebee" {
+                method initialize() {
+                bumblebee.auto(true)                           
+                arena.peso(150)         
+                bateriaAntiarea.misiles(true)
+                camion.cargar([bumblebee,bateriaAntiarea,arena])               
+                paqueteLadrillos.cantidadDeLadrillos(80)               
+                embalajeSeguridad.embalaje(paqueteLadrillos)           
+                }
+
+        test "embalajeSeguridad (paquete de ladrillos con 80 ladrillos)"{
+                assert.equals(160,embalajeSeguridad.peso())
+        }
+
+}       
+
+describe "test de gral" {
+                method initialize() {
+                camion.cargar([bumblebee,bateriaAntiarea,paqueteLadrillos,knightRider,contenedor,residuosRadioactivos])
+                arena.peso(100)
+                residuosRadioactivos.peso(20)
+                paqueteLadrillos.cantidadDeLadrillos(40)       
+                bateriaAntiarea.misiles(false)
+                bumblebee.auto(true)
+                }
+
+        test " todoPesoPar"{
+                assert.that(camion.todoPesoPar())
+        }       
+        test " peso total"{
+                assert.equals(2700,camion.pesoTotal())
+        }       
+        test " hayAlgunoQuePesa"{
+                assert.that(camion.hayAlgunoQuePesa(500))
+        }
+        test " elDeNivel"{
+                assert.that(camion.elDeNivel(15))
+        }       
+        test " excedidoDePeso()"{
+                assert.that(camion.excedidoDePeso())
+        }       
+        test " objetosQueSuperanPeligrosidad()"{
+                assert.that(camion.objetosQueSuperanPeligrosidad(20))
+        }   
+        test "objetosMasPeligrososQue(cosa)"{
+        	assert.that(camion.objetosMasPeligrososQue(paqueteLadrillos))
+        }     
+  }
+        

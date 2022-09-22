@@ -1,2 +1,60 @@
 import camion.*
 import cosas.*
+
+
+  describe "test de embalajeSeguridad" {
+                method initialize() {
+                residuosRadioactivos.peso(30)
+                embalajeSeguridad.embalaje(residuosRadioactivos)               
+                }
+
+        test "embalajeSeguridad()"{
+                assert.equals(30,embalajeSeguridad.peso())
+        }
+
+}
+
+describe "test de batería antiaérea" {
+                method initialize() {
+                bateriaAntiarea.misiles(false)                 
+                }
+
+        test "embalajeSeguridad_peso"{
+                assert.equals(200,bateriaAntiarea.peso())
+        }
+
+        test "embalajeSeguridad_peligrosidad"{
+                assert.equals(0,bateriaAntiarea.peligrosidad())
+        }
+
+}
+
+describe "test de paquete_de_ladrillos" {
+                method initialize() {
+                paqueteLadrillos.cantidadDeLadrillos(30)                               
+                }
+
+        test "paqueteLadrillos_peso"{
+                assert.equals(60,paqueteLadrillos.peso())
+        }
+        test "paqueteLadrillos_peligrosidad"{
+                assert.equals(2,paqueteLadrillos.peligrosidad())
+        }
+
+}
+
+/*
+Al contenedor, dos o tres cosas a elección. Todo esto en un archivo
+cosasTest.wtest.*/
+
+describe "test de contenedor" {
+        method initialie(){
+                contenedor.cargar([paqueteLadrillos, arena, bumblebee])
+                
+        }
+
+        test "contenedor"{
+                assert.equals(103,contenedor.peso())
+      }  
+
+}
